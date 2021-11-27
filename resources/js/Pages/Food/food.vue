@@ -1,5 +1,4 @@
 <template>
-    <app-layout title="Dashboard">
         <div class=" w-full flex bg-gray-800">
 
             <!-- main -->
@@ -65,7 +64,6 @@
                 </section>
             </main>
         </div>
-    </app-layout>
 </template>
 
 <script>

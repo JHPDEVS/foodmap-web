@@ -1,5 +1,5 @@
 <template>
-    <app-layout title="Dashboard">
+
 
         <div class="py-6">
             <!-- Breadcrumbs -->
@@ -179,7 +179,6 @@
             <!-- ./ Breadcrumbs -->
             {{food}}
         </div>
-    </app-layout>
 </template>
 
 <script>
