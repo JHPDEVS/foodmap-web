@@ -1,36 +1,89 @@
 <template>
-        <div class=" w-full flex bg-gray-800">
+    <app-layout data-theme="cupcake">
+        <div class=" w-full p-10">
 
             <!-- main -->
-            <main class="w-full overflow-y-auto">
-                <div class="px-10 mt-5">
-                    <span class="uppercase font-bold text-2xl text-white">{{food_name}} 검색결과 : {{page.total}} 건</span>
+            <div class="min-w-full overflow-y-auto bg-white card mx-auto">
+                <div class="wrapper">
+                    <input type="radio" name="select" id="option-1" checked v-model="picked" value="food">
+                    <input type="radio" name="select" id="option-2" v-model="picked" value="recipe">
+                    <label for="option-1" class="option option-1">
+                        <span>음식</span>
+                    </label>
+                    <label for="option-2" class="option option-2">
+                        <span>레시피</span>
+                    </label>
+
                 </div>
+            </div>
 
-    
-                    <div class="container flex justify-center mx-auto">
-                        <nav class="relative z-0 inline-flex rounded-md shadow-sm -space-x-px"
-                            aria-label="Pagination">
-                            <!-- Current: "z-10 bg-indigo-50 border-indigo-500 text-indigo-600", Default: "bg-white border-gray-300 text-gray-500 hover:bg-gray-50" -->
-                            <a v-for="(item,i) in page.links" v-bind:key="i">
-                                <button @click="refreshPage(item.label)" v-if="item.active==true"
-                                    class="h-10 px-5 text-white bg-gray-600 border border-r-0 border-gray-600">{{ item.label }}</button>
-                                <button @click="refreshPage(item.label)" v-else
-                                    class="h-10 px-5 text-gray-600 bg-white border border-gray-600 hover:bg-gray-100">{{ item.label }}</button>
-                            </a>
+            <!-- main -->
+            <div v-if="picked=='food'" class="min-w-full overflow-y-auto bg-white card mx-auto mt-3">
+                <div class="wrapper">
+                    <input type="radio" name="select2" id="option-6" checked v-model="picked2" value="all" @change="refresh()">
+                    <input type="radio" name="select2" id="option-7" v-model="picked2" value="livestock"  @change="refresh()">
+                    <input type="radio" name="select2" id="option-8" v-model="picked2" value="seafood"  @change="refresh()">
+                    <input type="radio" name="select2" id="option-9" v-model="picked2" value="processed"  @change="refresh()">
+                    <input type="radio" name="select2" id="option-10" v-model="picked2" value="food2"  @change="refresh()">
+                    <label for="option-6" class="option option-6">
+                        <span>전체</span>
+                    </label>
+                    <label for="option-7" class="option option-7">
+                        <span>농축산물</span>
+                    </label>
+                    <label for="option-8" class="option option-8">
+                        <span>수산물</span>
+                    </label>
+                    <label for="option-9" class="option option-9">
+                        <span>가공식품</span>
+                    </label>
+                    <label for="option-10" class="option option-10">
+                        <span>음식</span>
+                    </label>
+                </div>
+            </div>
+            <!-- main -->
+            <div class="min-w-full overflow-y-auto card mx-auto mt-3">
+                <div class="container flex justify-center mx-auto">
+                    <nav class="relative z-0 inline-flex rounded-md shadow-sm -space-x-px" aria-label="Pagination">
+                        <!-- Current: "z-10 bg-indigo-50 border-indigo-500 text-indigo-600", Default: "bg-white border-gray-300 text-gray-500 hover:bg-gray-50" -->
+                        <a v-for="(item,i) in page.links" v-bind:key="i">
+                            <button @click="refreshPage(item.label)" v-if="item.active==true"
+                                class="py-3 z-10 bg-primary border-primary text-white relative inline-flex items-center px-4 py-2 border text-sm font-medium">{{ item.label }}</button>
+                            <button @click="refreshPage(item.label)" v-else
+                                class="py-3 bg-white border-gray-300 text-gray-500 hover:bg-gray-50 relative inline-flex items-center px-4 py-2 border text-sm font-mediums">{{ item.label }}</button>
+                        </a>
 
-                        </nav>
+                    </nav>
+
+                </div>
+                <div class="min-w-full mx-auto mt-3 pb-5 h-10">
+                    <div class="form-control">
+
+                        <div class="relative">
+                            <input v-model="search_value" type="text" @keyup.enter="search" placeholder="검색어를 입력해주세요"
+                                class="w-full text-3xl pr-8 input input-primary input-bordered">
+                            <button @click="search"
+                                class="absolute top-0 right-0 rounded-l-none btn btn-primary">검색</button>
+                        </div>
 
                     </div>
 
+
+                </div>
+
                 <section class="container mx-auto p-6 font-mono">
+                    <div class="text-2xl font-bold mb-3"><b class="text-3xl text-primary font-bold">{{food_name}}</b>
+                        검색결과&nbsp;<b class="text-3xl text-primary font-bold"> {{page.total}} </b>개의 맛있는 음식이 있습니다.</div>
+
                     <div class="w-full mb-8 overflow-hidden rounded-lg shadow-lg">
                         <div class="w-full overflow-x-auto">
                             <table class="w-full">
                                 <thead>
                                     <tr
-                                        class="text-md font-semibold tracking-wide text-left text-gray-900 bg-gray-100 uppercase border-b border-gray-600">
+                                        class="text-md font-bold tracking-wide text-left text-white bg-primary uppercase border-b border-gray-600">
                                         <th class="px-4 py-3">제품명</th>
+                                        <th class="px-4 py-3">조사년도</th>
                                         <th class="px-4 py-3">1회 제공량</th>
                                         <th class="px-4 py-3">분류</th>
                                         <th class="px-4 py-3">1회 제공량 당 칼로리</th>
@@ -42,12 +95,12 @@
                                             <div class="flex items-center text-sm">
                                                 <div>
                                                     <a :href="`/food/show/${food.NO}/${food.식품명}`">
-                                                        <p class="font-semibold text-blue-500">{{food.식품명}}</p>
+                                                        <p class="font-semibold text-blue-500"><span class="bg-white border text-red-600 py-1 px-3 rounded-full text-xs">{{food.지역___제조사}}</span>{{food.식품명}}</p>
                                                     </a>
-                                                    <p class="text-xs text-gray-600">{{food.연도}}</p>
                                                 </div>
                                             </div>
                                         </td>
+                                        <td class="px-4 py-3 text-ms font-semibold border">{{food.연도}}</td>
                                         <td class="px-4 py-3 text-ms font-semibold border">{{food.일회제공량}}</td>
                                         <td class="px-4 py-3 text-xs border">
                                             <span
@@ -62,8 +115,9 @@
                         </div>
                     </div>
                 </section>
-            </main>
+            </div>
         </div>
+    </app-layout>
 </template>
 
 <script>
@@ -72,26 +126,35 @@
     export default {
         props: ['food_name'],
         components: {
-            AppLayout,
+            AppLayout
         },
         data() {
             return {
-                foods: [],  
+                foods: [],
                 page: [],
+                search_value: '',
+                picked: 'food',
+                picked2: 'all',
+                data: [],
             }
         },
 
         mounted() {
-            axios.get('/food/search/' + this.food_name)
+            axios.get('/food/search/' + this.food_name,{
+                params: {
+                        kind: 'all'
+                    }
+            })
                 .then(response => {
                     this.page = response.data.foods
                     this.foods = response.data.foods.data
                     this.pageLinks = response.data.foods.links
                 })
+            this.search_value = this.food_name
         },
 
-          methods: {
-             refreshPage(page) {
+        methods: {
+            refreshPage(page) {
                 if (page == "<") {
                     if (this.pageLinks[0].url) {
                         page = this.pageLinks[0].url.charAt(this.pageLinks[0].url.length - 1)
@@ -107,15 +170,139 @@
                         page = this.page.last_page;
                     }
                 }
-                axios.get("/food/search/" + this.food_name +"?page="+ page)
-                        .then(response => {
-                            this.page = response.data.foods;
-                            this.pageId = response.data.foods.current_page
-                            this.foods = response.data.foods.data;
-                            this.pageLinks = response.data.foods.links
+                axios.get("/food/search/" + this.food_name + "?page=" + page,{
+                    params: {
+                        kind: this.picked2
+                    }
                 })
+                    .then(response => {
+                        this.page = response.data.foods;
+                        this.pageId = response.data.foods.current_page
+                        this.foods = response.data.foods.data;
+                        this.pageLinks = response.data.foods.links
+                    })
             },
-          
+            refresh() {
+                axios.get('/food/search/' + this.food_name,{
+                    params: {
+                        kind: this.picked2
+                    }
+                })
+                    .then(response => {
+                        this.data = response.data.kind
+                        this.page = response.data.foods
+                        this.foods = response.data.foods.data
+                        this.pageLinks = response.data.foods.links
+                    })
+            },
+            search() {
+                if (this.search_value == "") {
+                    alert("음식명을 제대로 입력해주세요")
+                    return
+                }
+                if (this.picked == "food") {
+                    window.location.href = "/food/" + this.search_value
+                } else {
+                    window.location.href = "/recipe/search/" + this.search_value
+                }
+            },
         }
     }
 </script>
+<style>
+    .wrapper {
+        display: inline-flex;
+        height: 100px;
+        align-items: center;
+        justify-content: space-evenly;
+        padding: 20px 15px;
+    }
+
+    .wrapper .option {
+        background: #fff;
+        height: 100%;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+        margin: 0 10px;
+        border-radius: 5px;
+        cursor: pointer;
+        padding: 0 10px;
+        border: 2px solid lightgrey;
+        transition: all 0.3s ease;
+    }
+
+    .wrapper .option .dot {
+        height: 20px;
+        width: 20px;
+        background: #d9d9d9;
+        border-radius: 50%;
+        position: relative;
+    }
+
+    .wrapper .option .dot::before {
+        position: absolute;
+        content: "";
+        top: 4px;
+        left: 4px;
+        width: 12px;
+        height: 12px;
+        background: #42b2b8;
+        border-radius: 50%;
+        opacity: 0;
+        transform: scale(1.5);
+        transition: all 0.3s ease;
+    }
+
+    input[type="radio"] {
+        display: none;
+    }
+
+    #option-1:checked:checked~.option-1,
+    #option-2:checked:checked~.option-2,
+    #option-6:checked:checked~.option-6,
+    #option-7:checked:checked~.option-7,
+    #option-8:checked:checked~.option-8,
+    #option-9:checked:checked~.option-9,
+    #option-10:checked:checked~.option-10 {
+        border-color: #42b2b8;
+        background: #42b2b8;
+    }
+
+    #option-1:checked:checked~.option-1 .dot,
+    #option-2:checked:checked~.option-2 .dot,
+    #option-6:checked:checked~.option-6 .dot,
+    #option-7:checked:checked~.option-7 .dot,
+    #option-8:checked:checked~.option-8 .dot,
+    #option-9:checked:checked~.option-9 .dot,
+    #option-10:checked:checked~.option-10 .dot {
+        background: #fff;
+    }
+
+    #option-1:checked:checked~.option-1 .dot::before,
+    #option-2:checked:checked~.option-2 .dot::before,
+    #option-6:checked:checked~.option-6 .dot::before,
+    #option-7:checked:checked~.option-7 .dot::before,
+    #option-8:checked:checked~.option-8 .dot::before,
+    #option-9:checked:checked~.option-9 .dot::before,
+    #option-10:checked:checked~.option-10 .dot::before {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    .wrapper .option span {
+        font-size: 20px;
+        color: #808080;
+    }
+
+    #option-1:checked:checked~.option-1 span,
+    #option-2:checked:checked~.option-2 span,
+    #option-6:checked:checked~.option-6 span,
+    #option-7:checked:checked~.option-7 span,
+    #option-8:checked:checked~.option-8 span,
+    #option-9:checked:checked~.option-9 span,
+    #option-10:checked:checked~.option-10 span {
+        color: #fff;
+    }
+</style>
