@@ -3,7 +3,7 @@
 
     <jet-authentication-card>
         <template #logo>
-            <jet-authentication-card-logo />
+             <h1 data-theme="cupcake" class="font-bold text-5xl text-primary" style="font-family: 'Jua', sans-serif;"><a :href="route('dashboard')">푸드맵</a></h1>
         </template>
 
         <jet-validation-errors class="mb-4" />
@@ -14,29 +14,32 @@
 
         <form @submit.prevent="submit">
             <div>
-                <jet-label for="email" value="Email" />
+                <jet-label for="email" value="이메일" />
                 <jet-input id="email" type="email" class="mt-1 block w-full" v-model="form.email" required autofocus />
             </div>
 
             <div class="mt-4">
-                <jet-label for="password" value="Password" />
+                <jet-label for="password" value="비밀번호" />
                 <jet-input id="password" type="password" class="mt-1 block w-full" v-model="form.password" required autocomplete="current-password" />
             </div>
 
             <div class="block mt-4">
                 <label class="flex items-center">
                     <jet-checkbox name="remember" v-model:checked="form.remember" />
-                    <span class="ml-2 text-sm text-gray-600">Remember me</span>
+                    <span class="ml-2 text-sm text-gray-600">비밀번호 저장</span>
                 </label>
             </div>
 
             <div class="flex items-center justify-end mt-4">
                 <Link v-if="canResetPassword" :href="route('password.request')" class="underline text-sm text-gray-600 hover:text-gray-900">
-                    Forgot your password?
+                    비밀번호 찾기
                 </Link>
 
-                <jet-button class="ml-4" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-                    Log in
+                <Link  :href="route('register')" class="mx-3 underline text-sm text-gray-600 hover:text-gray-900">
+                    회원가입
+                </Link>
+                <jet-button data-theme="cupcake" class="btn p-4 ml-4 bg-primary" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                    로그인
                 </jet-button>
             </div>
         </form>
@@ -96,3 +99,6 @@
         }
     })
 </script>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Jua&display=swap');
+</style>
