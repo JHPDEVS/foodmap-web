@@ -1,199 +1,489 @@
 <template>
 
+    <app-layout data-theme="cupcake">
+        <div class="py-20 bg-primary flex justify-center items-center">
+            <div class="md:px-4 md:grid md:grid-cols-3 lg:grid-cols-3 gap-10 space-y-4 md:space-y-0">
+                <div class="max-w-sm bg-white px-6 pt-6 pb-2 rounded-xl shadow-lg ">
+                    <h3 class="mb-3 text-2xl font-bold text-primary">{{food.식품명}} ({{food.일회제공량}}{{food.내용량_단위}})</h3>
 
-        <div class="py-6">
-            <!-- Breadcrumbs -->
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="flex items-center space-x-2 text-gray-400 text-sm">
-                    <a href="#" class="hover:underline hover:text-gray-600">{{category}}</a>
-                    <span>
-                        <svg class="h-5 w-5 leading-none text-gray-300" xmlns="http://www.w3.org/2000/svg" fill="none"
-                            viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                        </svg>
-                    </span>
-                    <a href="#" class="hover:underline hover:text-gray-600">{{category2}}</a>
-                    <span>
-                        <svg class="h-5 w-5 leading-none text-gray-300" xmlns="http://www.w3.org/2000/svg" fill="none"
-                            viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                        </svg>
-                    </span>
-                    <span>{{category3}}</span>
+                    <div class="relative">
+                        <img class="w-full rounded-xl" :src="image" referrerpolicy="no-referrer" alt="Colors" />
+                        <p
+                            class="absolute top-0 bg-yellow-300 text-gray-800 font-semibold py-1 px-3 rounded-br-lg rounded-tl-lg">
+                            {{food.식품상세분류}}</p>
+                    </div>
+
+                </div>
+                <div class="max-w-sm bg-white px-6 pt-6 pb-2 rounded-xl shadow-lg">
+                    <div class="p-1 border-4 border-black font-sans  justify-center">
+                        <div class="text-4xl p-2 font-extrabold leading-none bg-black text-white">영양정보</div>
+                        <div class="flex justify-between font-bold border-b-8 border-black">
+                            <div>1회제공량</div>
+                            <div>{{food.일회제공량}}{{food.내용량_단위}}</div>
+                        </div>
+                        <div class="flex justify-between items-end font-extrabold">
+                            <div>
+                                <div class="font-bold">1회제공량당</div>
+                                <div class="text-4xl">{{kcal}}</div>
+                            </div>
+                            <div class="text-3 xl">칼로리</div>
+                        </div>
+                        <div class="border-t-4 border-black text-sm pb-1">
+                            <div class="text-right font-bold pt-1 pb-1">1일 영양성분 기준치</div>
+                            <hr class="border-gray-500" />
+                            <div class="flex justify-between">
+                                <div>
+                                    <span class="font-bold">나트륨</span> {{나트륨}}mg
+                                </div>
+                                <div class="font-bold">{{dailySalt}}%</div>
+                            </div>
+                            <hr class="border-gray-500" />
+                            <div class="flex justify-between">
+                                <div> <span class="font-bold">탄수화물</span> {{탄수화물}}g</div>
+                                <div class="font-bold">{{dailyFiber}}%</div>
+                            </div>
+                            <hr class="border-gray-500" />
+                            <div class="flex justify-between">
+                                <div> <span class="font-bold pl-4"> 당류</span> {{당류}}g</div>
+                                <div class="font-bold">{{dailySuger}}%</div>
+                            </div>
+                            <hr class="border-gray-500" />
+                            <div class="flex justify-between">
+                                <div> <span class="font-bold"> 지방</span> {{지방}}g</div>
+                                <div class="font-bold">{{dailyFat}}%</div>
+                            </div>
+                            <hr class="border-gray-500" />
+                            <div class="flex justify-between">
+                                <div> <span class="font-bold pl-4"> 트랜스지방</span> {{트랜스지방}}g</div>
+                                <div class="font-bold">{{dailyTransFat}}%</div>
+                            </div>
+                            <hr class="border-gray-500" />
+                            <div class="flex justify-between">
+                                <div> <span class="font-bold pl-4"> 포화지방</span> {{포화지방}}g</div>
+                                <div class="font-bold">{{dailypoFat}}%</div>
+                            </div>
+                            <hr class="border-gray-500" />
+                            <div class="flex justify-between">
+                                <div> <span class="font-bold"> 콜레스테롤</span> {{콜레스테롤}}mg</div>
+                                <div class="font-bold">{{dailyCole}}%</div>
+                            </div>
+                            <hr class="border-gray-500" />
+                            <div class="flex justify-between">
+                                <div> <span class="font-bold"> 단백질</span> {{단백질}}mg</div>
+                                <div class="font-bold">{{dailyProtein}}%</div>
+                            </div>
+                        </div>
+                        <div class="pt-1 text-sm">
+                            <div class="border-t-4 border-black flex leading-none text-ms pt-2 pb-1">
+                                <div class="pr-1">*</div>
+                                <div><span class="font-bold">1일 영양성분 기준치에 대한 비율(%)</span> 은 2000 kcal 기준이므로 개인의
+                                    필요 열량에 따라 다를 수 있습니다.</div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-6">
-                    <div class="flex flex-col md:flex-row -mx-4">
-                        <div class="md:flex-1 px-4">
+                <div class="max-w-sm bg-white px-6 pt-6  rounded-xl shadow-lg">
 
-                            <img v-if="image" class="object-cover h-100 w-full" :src="`${image}`">
+                    <div class="w-80 h-auto  p-3 rounded-full">
+                        <div>
+                            <h1 class="font-bold text-2xl">1일영양섭취기준(%)</h1>
+                        </div>
+                         <div class="inline-block font-bold ">
+                            에너지
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-6 dark:bg-gray-700">
 
-                            <div class="flex -mx-2 mb-4">
-                                <template x-for="i in 4">
-                                    <div class="flex-1 px-2">
-                                        <button x-on:click="image = i"
-                                            :class="{ 'ring-2 ring-indigo-300 ring-inset': image === i }"
-                                            class="focus:outline-none w-full rounded-lg h-24 md:h-32 bg-gray-100 flex items-center justify-center">
-                                            <span x-text="i" class="text-2xl"></span>
-                                        </button>
-                                    </div>
-                                </template>
+                            <div class="bg-red-400 h-6 rounded-full dark:bg-gray-300" style="max-width:100%"
+                                :style="`width: ${kcalper}%`">
+                                <p class="px-3 text-right font-bold">{{kcalper}}%</p>
                             </div>
                         </div>
-                        <div class="md:flex-1 px-4">
-                            <h2 v-if="title" v-html="title"
-                                class="mb-2 leading-tight tracking-tight font-bold text-gray-800 text-2xl md:text-3xl">
-                            </h2>
-                            <h2 v-else v-html="food.식품명"
-                                class="mb-2 leading-tight tracking-tight font-bold text-gray-800 text-2xl md:text-3xl">
-                            </h2>
+                        <div class="inline-block font-bold ">
+                            나트륨
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-6 dark:bg-gray-700">
 
-                            <p v-if="maker" class="text-indigo-600 hover:underline">{{maker}}</p>
-                            <p v-else class="text-indigo-600 hover:underline">{{food.지역___제조사}} [{{food.식품상세분류}}]</p>
-
-
-
-
-                            <div class="flex py-4 space-x-4">
-                                <div v-if="items[1]" class="relative">
-                                    <div
-                                        class="text-center left-0 pt-2 right-0 absolute block text-xs uppercase text-gray-400  font-semibold">
-                                        최저가</div>
-                                    <select
-                                        class="cursor-pointer appearance-none rounded-xl border p-5 border-gray-200 pl-4 pr-8 h-14 flex items-end pb-1">
-                                        <option>{{items[0].lprice}}원</option>
-                                    </select>
-                                </div>
-
-                                <button v-if="items[1]" @click="clickShop" type="button"
-                                    class="h-14 px-6 py-2 font-semibold rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white">
-                                    최저가 구매하기 : {{items[0].mallName}} {{ items[0].lprice}}￦
-                                </button>
-                                <button disabled v-else
-                                    class="h-14 px-6 py-2 font-semibold rounded-xl bg-gray-300 text-white">판매하지 않는
-                                    상품입니다</button>
-                            </div>
-
-                            <div>
-                                <div v-if="items[1]" class="bg-white shadow-md rounded ">
-                                    <table class="text-left w-full border-collapse">
-                                        <!--Border collapse doesn't work on this site yet but it's available in newer tailwind versions -->
-                                        <thead>
-                                            <tr>
-                                                <th
-                                                    class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">
-                                                    판매처</th>
-                                                <th
-                                                    class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">
-                                                    판매가</th>
-                                                <th
-                                                    class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">
-                                                    사러가기</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr v-for="(item,i) in items" v-bind:key="i" class="hover:bg-grey-lighter">
-                                                <td class="py-4 px-6 border-b border-grey-light">{{item.mallName}}</td>
-                                                <td class="py-4 px-6 border-b border-grey-light">{{item.lprice}}</td>
-                                                <td class="py-4 px-6 border-b border-grey-light "> <a :href="item.link"
-                                                        class="bg-green-200 text-green-600 py-1 px-3 rounded-full">사러가기</a>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
+                            <div class="bg-green-500 h-6 rounded-full dark:bg-gray-300"  style="max-width:100%" :style="`width: ${dailySalt}%`">
+                                <p class="px-3 text-right font-bold">{{dailySalt}}%</p>
                             </div>
                         </div>
 
-                        <div class="justify-center mx-auto flex flex-nowrap">
-                            <div class="p-1 border-4 border-black font-sans w-72">
-                                <div class="text-4xl p-2 font-extrabold leading-none bg-black text-white">영양정보</div>
-                                <div class="flex justify-between font-bold border-b-8 border-black">
-                                    <div>1회제공량</div>
-                                    <div>{{food.일회제공량}}{{food.내용량_단위}}</div>
-                                </div>
-                                <div class="flex justify-between items-end font-extrabold">
-                                    <div>
-                                        <div class="font-bold">1회제공량당</div>
-                                        <div class="text-4xl">{{food.에너지_kcal_}}</div>
-                                    </div>
-                                    <div class="text-3 xl">칼로리</div>
-                                </div>
-                                <div class="border-t-4 border-black text-sm pb-1">
-                                    <div class="text-right font-bold pt-1 pb-1">1일 영양성분 기준치</div>
-                                    <hr class="border-gray-500" />
-                                    <div class="flex justify-between">
-                                        <div>
-                                            <span class="font-bold">나트륨</span> {{food.나트륨_mg_}}mg
-                                        </div>
-                                        <div class="font-bold">{{dailySalt}}%</div>
-                                    </div>
-                                    <hr class="border-gray-500" />
-                                    <div class="flex justify-between">
-                                        <div> <span class="font-bold">탄수화물</span> {{food.탄수화물_g_}}g</div>
-                                        <div class="font-bold">{{dailyFiber}}%</div>
-                                    </div>
-                                    <hr class="border-gray-500" />
-                                    <div class="flex justify-between">
-                                        <div> <span class="font-bold pl-4"> 당류</span> {{food.총당류_g_}}g</div>
-                                        <div class="font-bold">{{dailySuger}}%</div>
-                                    </div>
-                                    <hr class="border-gray-500" />
-                                    <div class="flex justify-between">
-                                        <div> <span class="font-bold"> 지방</span> {{food.지방_g_}}g</div>
-                                        <div class="font-bold">{{dailyFat}}%</div>
-                                    </div>
-                                    <hr class="border-gray-500" />
-                                    <div class="flex justify-between">
-                                        <div> <span class="font-bold pl-4"> 트랜스지방</span> {{food.트랜스_지방산_g_}}g</div>
-                                        <div class="font-bold">{{dailyTransFat}}%</div>
-                                    </div>
-                                    <hr class="border-gray-500" />
-                                     <div class="flex justify-between">
-                                        <div > <span class="font-bold pl-4"> 포화지방</span> {{food.총_포화_지방산_g_}}g</div>
-                                        <div class="font-bold">{{dailypoFat}}%</div>
-                                    </div>
-                                    <hr class="border-gray-500" />
-                                       <div class="flex justify-between">
-                                        <div > <span class="font-bold"> 콜레스테롤</span> {{food.콜레스테롤_mg_}}mg</div>
-                                        <div class="font-bold">{{dailyCole}}%</div>
-                                    </div>
-                                       <hr class="border-gray-500" />
-                                       <div class="flex justify-between">
-                                        <div > <span class="font-bold"> 단백질</span> {{food.단백질_g_}}mg</div>
-                                        <div class="font-bold">{{dailyProtein}}%</div>
-                                    </div>
-                                </div>
-                                <div class="pt-1 text-sm">                          
-                                    <div class="border-t-4 border-black flex leading-none text-ms pt-2 pb-1">
-                                        <div class="pr-1">*</div>
-                                        <div><span class="font-bold">1일 영양성분 기준치에 대한 비율(%)</span> 은 2000 kcal 기준이므로 개인의
-                                            필요 열량에 따라 다를 수 있습니다.</div>
-                                    </div>
-                                </div>
+
+                        <div class="inline-block font-bold">
+                            탄수화물
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-6 dark:bg-gray-700">
+
+                            <div class="bg-yellow-400 h-6 rounded-full dark:bg-gray-300"  style="max-width:100%"
+                                :style="`width: ${dailyFiber}%`">
+                                <p class="px-3 text-right font-bold">{{dailyFiber}}%</p>
+                            </div>
+                        </div>
+
+                        <div class="inline-block font-bold">
+                            당류
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-6 dark:bg-gray-700">
+
+                            <div class="bg-warning h-6 rounded-full dark:bg-gray-300"  style="max-width:100%" :style="`width: ${dailySuger}%`">
+                                <p class="px-3 text-right font-bold">{{dailySuger}}%</p>
+                            </div>
+                        </div>
+
+
+                        <div class="inline-block font-bold ">
+                            지방
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-6 dark:bg-gray-700">
+
+                            <div class="bg-blue-400 h-6 rounded-full dark:bg-gray-300"  style="max-width:100%" :style="`width: ${dailyFat}%;`">
+                                <p class="px-3 text-right font-bold">{{dailyFat}}%</p>
+                            </div>
+                        </div>
+                        <div class="inline-block font-bold ">
+                            트랜스지방
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-6 dark:bg-gray-700">
+
+                            <div class="bg-indigo-400 h-6 rounded-full dark:bg-gray-300" style="max-width:100%"
+                                :style="`width: ${dailyTransFat}%`">
+                                <p class="px-3 text-right font-bold">{{dailyTransFat}}%</p>
+                            </div>
+                        </div>
+
+                        <div class="inline-block font-bold ">
+                            포화지방
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-6 dark:bg-gray-700">
+
+                            <div class="bg-primary h-6 rounded-full dark:bg-gray-300"  style="max-width:100%" :style="`width: ${dailypoFat}%`">
+                                <p class="px-3 text-right font-bold">{{dailypoFat}}%</p>
+                            </div>
+                        </div>
+
+                        <div class="inline-block font-bold ">
+                            콜레스테롤
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-6 dark:bg-gray-700">
+
+                            <div class="bg-purple-400 h-6 rounded-full dark:bg-gray-300"  style="max-width:100%"
+                                :style="`width: ${dailyCole}%`">
+                                <p class="px-3 text-right font-bold">{{dailyCole}}%</p>
+                            </div>
+                        </div>
+
+                        <div class="inline-block font-bold ">
+                            단백질
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-6 dark:bg-gray-700">
+
+                            <div class="bg-pink-400 h-6 rounded-full dark:bg-gray-300"  style="max-width:100%"
+                                :style="`width: ${dailyProtein}%`">
+                                <p class="px-3 text-right font-bold">{{dailyProtein}}%</p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <!-- ./ Breadcrumbs -->
-            {{food}}
+
+
+
         </div>
+
+        <div class="w-full xl:w-10/12 mb-12 xl:mb-0 px-4 mx-auto mt-6" data-theme="cupcake">
+            <div class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded ">
+                <div class="rounded-t mb-0 px-4 py-3 border-0">
+                    <div class="flex flex-wrap items-center">
+                        <div class="relative w-full px-4 max-w-full flex-grow flex-1">
+                            <h3 class="font-semibold text-2xl text-primary">영양성분</h3>
+                        </div>
+                        <div class="relative w-full px-4 max-w-full flex-grow flex-1 text-right">
+                            <button @click="save" data-theme="cupcake"
+                                class="btn btn-xl glass text-primary transform transition duration-500  hover:scale-110"
+                                type="button"><i class="fas fa-utensils fa-lg">&nbsp; {{food_name}} {{serve}}{{food.내용량_단위}} 내 뱃속에 저장</i></button>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="block w-full overflow-x-auto text-center">
+                    <table class=" w-full text-center border-collapse">
+                        <thead>
+                            <tr>
+                                <th
+                                    class="text-center bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xl uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+                                    분류
+                                </th>
+                                <th
+                                    class="text-center bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xl uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+                                    {{food.일회제공량}}{{food.내용량_단위}} 당 함량
+                                </th>
+                                <th
+                                    class="text-center bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xl uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold ">
+                                    단위
+                                </th>
+                                <th
+                                    class="flex items-center justify-center bg-gray-200 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xl uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold " >
+                                    <div class="tooltip tooltip-open mt-5" data-tip="숫자 수정가능!">
+                                        <input type="text" v-model="serve" size="4" class="input input-bordered font-bold text-2xl border-4 tooltip tooltip-open">
+                                        <span class="btn lowercase">{{food.내용량_단위}}</span>
+                                             </div>
+                                </th>
+                                <th
+                                    class="text-center bg-gray-200 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xl uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+                                    1일 영양성분 기준치대비 %
+                                </th>
+                            </tr>
+                        </thead>
+
+                        <tbody class="text-center">
+                            <tr>
+                                <th class="    whitespace-nowrap p-4  text-blueGray-700 ">
+                                    에너지
+                                </th>
+                                <td class=" text-xl whitespace-nowrap p-4 ">
+                                    {{kcal}}
+                                </td>
+                                <td class="   text-xl whitespace-nowrap p-4">
+                                    ㎉
+                                </td>
+                                <td class="bg-gray-100 align-middle  text-xl whitespace-nowrap p-4">
+                                    {{kcalcal}}&nbsp;㎉
+                                </td>
+                                <td class="bg-gray-100   align-middle  text-xl whitespace-nowrap p-4">
+                                    {{kcalper}}% [<b class="text-red-300">{{kcalcal}}</b>/2000]㎉
+                                </td>
+                            </tr>
+                            
+
+                            <tr>
+                                <th class="    whitespace-nowrap p-4  text-blueGray-700 ">
+                                    단백질
+                                </th>
+                                <td class=" text-xl whitespace-nowrap p-4 ">
+                                    {{단백질}}
+                                </td>
+                                <td class="   text-xl whitespace-nowrap p-4">
+                                    g
+                                </td>
+                                <td class="bg-gray-100 align-middle  text-xl whitespace-nowrap p-4">
+                                    {{proteincal}}g
+                                </td>
+                                <td class="bg-gray-100   align-middle  text-xl whitespace-nowrap p-4">
+                                    {{proteinper}}% [<b class="text-red-300">{{proteincal}}</b>/60]g
+                                </td>
+                            </tr>
+
+                              <tr>
+                                <th class="    whitespace-nowrap p-4  text-blueGray-700 ">
+                                    지방
+                                </th>
+                                <td class=" text-xl whitespace-nowrap p-4 ">
+                                    {{지방}}
+                                </td>
+                                <td class="   text-xl whitespace-nowrap p-4">
+                                    g
+                                </td>
+                                <td class="bg-gray-100 align-middle  text-xl whitespace-nowrap p-4">
+                                    {{fatcal}}g
+                                </td>
+                                <td class="bg-gray-100   align-middle  text-xl whitespace-nowrap p-4">
+                                    {{fatper}}% [<b class="text-red-300">{{fatcal}}</b>/51]g
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <th class="    whitespace-nowrap p-4  text-blueGray-700 ">
+                                    탄수화물
+                                </th>
+                                <td class=" text-xl whitespace-nowrap p-4 ">
+                                    {{탄수화물}}
+                                </td>
+                                <td class="   text-xl whitespace-nowrap p-4">
+                                    g
+                                </td>
+                                <td class="bg-gray-100 align-middle  text-xl whitespace-nowrap p-4">
+                                    {{fibercal}}g
+                                </td>
+                                <td class="bg-gray-100   align-middle  text-xl whitespace-nowrap p-4">
+                                    {{fiberper}}% [<b class="text-red-300">{{fibercal}}</b>/250]g
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <th class="    whitespace-nowrap p-4  text-blueGray-700 ">
+                                    총당류
+                                </th>
+                                <td class=" text-xl whitespace-nowrap p-4 ">
+                                    {{당류}}
+                                </td>
+                                <td class="   text-xl whitespace-nowrap p-4">
+                                    g
+                                </td>
+                                <td class="bg-gray-100 align-middle  text-xl whitespace-nowrap p-4">
+                                    {{sugercal}}g
+                                </td>
+                                <td class="bg-gray-100   align-middle  text-xl whitespace-nowrap p-4">
+                                    {{sugercal}}% [<b class="text-red-300">{{sugercal}}</b>/100]g
+                                </td>
+                            </tr>
+
+                             <tr>
+                                <th class="    whitespace-nowrap p-4  text-blueGray-700 ">
+                                    콜레스테롤
+                                </th>
+                                <td class=" text-xl whitespace-nowrap p-4 ">
+                                    {{콜레스테롤}}
+                                </td>
+                                <td class="   text-xl whitespace-nowrap p-4">
+                                    mg
+                                </td>
+                                <td class="bg-gray-100 align-middle  text-xl whitespace-nowrap p-4">
+                                    {{colcal}}mg
+                                </td>
+                                <td class="bg-gray-100   align-middle  text-xl whitespace-nowrap p-4">
+                                    {{colper}}% [<b class="text-red-300">{{colcal}}</b>/300]mg
+                                </td>
+                            </tr>
+
+                             <tr>
+                                <th class="    whitespace-nowrap p-4  text-blueGray-700 ">
+                                    포화지방
+                                </th>
+                                <td class=" text-xl whitespace-nowrap p-4 ">
+                                    {{포화지방}}
+                                </td>
+                                <td class="   text-xl whitespace-nowrap p-4">
+                                    g
+                                </td>
+                                <td class="bg-gray-100 align-middle  text-xl whitespace-nowrap p-4">
+                                    {{pofatcal}}g
+                                </td>
+                                <td class="bg-gray-100   align-middle  text-xl whitespace-nowrap p-4">
+                                    {{pofatper}}% [<b class="text-red-300">{{pofatcal}}</b>/15]g
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <th class="    whitespace-nowrap p-4  text-blueGray-700 ">
+                                    트랜스지방
+                                </th>
+                                <td class=" text-xl whitespace-nowrap p-4 ">
+                                    {{트랜스지방}}
+                                </td>
+                                <td class="   text-xl whitespace-nowrap p-4">
+                                    g
+                                </td>
+                                <td class="bg-gray-100 align-middle  text-xl whitespace-nowrap p-4">
+                                    {{transfatcal}}g
+                                </td>
+                                <td class="bg-gray-100   align-middle  text-xl whitespace-nowrap p-4">
+                                    {{transfatper}}% [<b class="text-red-300">{{transfatcal}}</b>/2]g
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <th class="    whitespace-nowrap p-4  text-blueGray-700 ">
+                                    나트륨
+                                </th>
+                                <td class=" text-xl whitespace-nowrap p-4 ">
+                                    {{나트륨}}
+                                </td>
+                                <td class="   text-xl whitespace-nowrap p-4">
+                                    mg
+                                </td>
+                                <td class="bg-gray-100 align-middle  text-xl whitespace-nowrap p-4">
+                                    {{saltcal}}mg
+                                </td>
+                                <td class="bg-gray-100   align-middle  text-xl whitespace-nowrap p-4">
+                                    {{saltper}}% [<b class="text-red-300">{{saltcal}}</b>/2000]mg
+                                </td>
+                            </tr>
+                        </tbody>
+
+                    </table>
+                </div>
+            </div>
+        </div>
+    </app-layout>
 </template>
 
 <script>
     import axios from 'axios'
     import AppLayout from '@/Layouts/AppLayout.vue'
+    import cheerio from 'cheerio'
     export default {
         props: ['food_id', 'food_name'],
         components: {
-            AppLayout,
+            AppLayout
+
+        },
+        computed: {
+            kcalcal: function() {
+                return (this.kcal/this.food.일회제공량*this.serve).toFixed(0)
+            },
+            proteincal: function() {
+                return (this.단백질/this.food.일회제공량*this.serve).toFixed(0)
+            },
+            fatcal: function() {
+                return (this.지방/this.food.일회제공량*this.serve).toFixed(0)
+            },
+            fatper: function() {
+                return (this.fatcal/51*100).toFixed(0)
+            },
+            fiberper: function() {
+                return (this.fibercal/250*100).toFixed(0)
+            },
+            fibercal: function() {
+                return (this.탄수화물/this.food.일회제공량*this.serve).toFixed(0)
+            },
+            sugercal: function() {
+                return (this.당류/this.food.일회제공량*this.serve).toFixed(0)
+            },
+            proteinper: function() {
+                return (this.proteincal/60*100).toFixed(0)
+            },
+            kcalper: function() {
+                return (this.kcalcal/2000*100).toFixed(0)
+            },
+            colcal: function() {
+                return (this.콜레스테롤/this.food.일회제공량*this.serve).toFixed(0)
+            },
+            colper: function() {
+                return (this.colcal/300*100).toFixed(0)
+            },
+            pofatcal: function() {
+                return (this.포화지방/this.food.일회제공량*this.serve).toFixed(0)
+            },
+            pofatper: function() {
+                return (this.pofatcal/15*100).toFixed(0)
+            },
+            transfatcal: function() {
+                return (this.트랜스지방/this.food.일회제공량*this.serve).toFixed(0)
+            },
+            transfatper: function() {
+                return (this.transfatcal/2.2*100).toFixed(0)
+            },
+            saltcal: function() {
+                return (this.나트륨/this.food.일회제공량*this.serve).toFixed(0)
+            },
+            saltper: function() {
+                return (this.saltcal/2000*100).toFixed(0)
+            }
         },
         data() {
             return {
                 food: '',
                 items: [],
                 image: '',
+                post: [],
+                data: [],
+                pack: [],
+                kcal: '',
+                image: '/image/noimg.gif',
+                serve: '',
+                kcalcalc: ''
             }
         },
 
@@ -202,24 +492,66 @@
                 .then(response => {
                     this.food = response.data.food
                     this.getImage()
-
-                    this.dailySalt = ((this.food.나트륨_mg_ / 2000) * 100).toFixed(1)
-                    this.dailyFiber = ((this.food.탄수화물_g_ / 250) * 100).toFixed(1)
-                    this.dailySuger = (this.food.총당류_g_).toFixed(1)
-                    this.dailyFat = ((this.food.지방_g_ / 51) * 100).toFixed(1)
-                    this.dailyTransFat = (this.food.트랜스_지방산_g_ / 2.2 * 100).toFixed(1)
-                    this.dailypoFat = (this.food.총_포화_지방산_g_ / 15 * 100).toFixed(1)
+                    this.kcal = parseInt(this.food.에너지_kcal_)
+                    this.나트륨 = parseInt(this.food.나트륨_mg_)
+                    this.탄수화물 = parseInt(this.food.탄수화물_g_)
+                    this.당류 = parseInt(this.food.총당류_g_)
+                    this.지방 = parseInt(this.food.지방_g_)
+                    this.트랜스지방 = parseInt(this.food.트랜스_지방산_g_)
+                    this.포화지방 = parseInt(this.food.총_포화_지방산_g_)
+                    this.콜레스테롤 = parseInt(this.food.콜레스테롤_mg_)
+                    this.단백질 = parseInt(this.food.단백질_g_)
+                    this.dailySalt = ((this.나트륨 / 2000) * 100).toFixed(1)
+                    this.dailyFiber = ((this.탄수화물 / 250) * 100).toFixed(1)
+                    this.dailySuger = (this.당류)
+                    this.dailyFat = ((this.지방 / 51) * 100).toFixed(1)
+                    this.dailyTransFat = (this.트랜스지방 / 2.2 * 100).toFixed(1)
+                    this.dailypoFat = (this.포화지방 / 15 * 100).toFixed(1)
                     this.dailyCole = (this.food.콜레스테롤_mg_ / 300 * 100).toFixed(1)
                     this.dailyProtein = (this.food.단백질_g_ / 60 * 100).toFixed(1)
+                    this.serve =this.food.일회제공량
                 })
         },
         methods: {
-            getImage() {     
-                axios.get('https://www.ckme.live/https://openapi.naver.com/v1/search/shop.json', {
+           save() {
+                const bodyFormData = new FormData();
+                bodyFormData.append('user_id', this.$page.props.user.id);
+                bodyFormData.append('kcal', this.kcalcal);
+                bodyFormData.append('kcal_per', this.kcalper);
+                bodyFormData.append('pro', this.proteincal);
+                bodyFormData.append('pro_per', this.proteinper);
+                bodyFormData.append('fat', this.fatcal);
+                bodyFormData.append('fat_per', this.fatper);
+                bodyFormData.append('fiber', this.fibercal);
+                bodyFormData.append('fiber_per', this.fiberper);
+                bodyFormData.append('suger', this.sugercal);
+                bodyFormData.append('suger_per', this.sugercal);
+                bodyFormData.append('col', this.colcal);
+                bodyFormData.append('col_per', this.colper);
+                bodyFormData.append('po', this.pofatcal);
+                bodyFormData.append('po_per', this.pofatper);
+                bodyFormData.append('trans', this.transfatcal);
+                bodyFormData.append('trans_per', this.transfatper);
+                bodyFormData.append('salt', this.saltcal);
+                bodyFormData.append('salt_per', this.saltper);
+                bodyFormData.append('product_title', this.food_name);
+                bodyFormData.append('product_id', this.food_id);
+                bodyFormData.append('serve', this.serve+this.food.내용량_단위);
+                axios.post('/menu/save', bodyFormData)
+                    .then(response => {
+                        if (response.data.status == "success") {
+                            alert(`${this.food_name}  ${this.serve}${this.food.내용량_단위} 저장완료`)
+
+                        } 
+                    })
+                    .catch(error => {
+                        alert("에러")
+                    })
+            },
+            getImage() {
+                axios.get('https://www.ckme.live/https://openapi.naver.com/v1/search/encyc.json', {
                         params: {
-                            query: this.food.지역___제조사 + this.food.식품명   ,
-                            display: 5,
-                            sort: 'asc'
+                            query: this.food.식품명,
                         },
                         headers: {
                             'X-Naver-Client-Id': '7qRPkXSv04vUKHhniI_B',
@@ -227,39 +559,46 @@
                         }
                     })
                     .then(response => {
-                        if ((this.food.상용제품 != '품목대표') && response.data.items.length >=5) {
-                            this.items = response.data.items
-                            this.image = response.data.items[0].image
+                        this.items = response.data.items
+                        this.image = response.data.items[0].thumbnail
+                        if (this.image) {
+                            console.log(this.items)
+                            axios.get("https://www.ckme.live/" + this.items[0].link, )
+                                .then(response => {
+                                    const $ = cheerio.load(response.data)
+                                    var result = $('meta[property="og:image"]').attr('content');
+                                    this.image = result
+                                })
                         } else {
-                            axios.get('https://www.ckme.live/https://openapi.naver.com/v1/search/image.json', {
-                                params: {
-                                    query: this.food.식품명,
-                                    display: 1,
-                                    sort: 'sim',
-                                    filter: 'medium'
-                                },
-                                headers: {
-                                    'X-Naver-Client-Id': '7qRPkXSv04vUKHhniI_B',
-                                    'X-Naver-Client-Secret': '5yVDk4wVaa'
-                                }
-                            })
-                            .then(response=>{
-                                this.image = response.data.items[0].thumbnail
-                            })
-                            .catch(error=>{
-                                console.log(error)
-                            })
+                            axios.get('https://www.ckme.live/https://openapi.naver.com/v1/search/shop.json', {
+                                    params: {
+                                        query: this.food.식품명,
+                                        display: 5
+                                    },
+                                    headers: {
+                                        'X-Naver-Client-Id': '7qRPkXSv04vUKHhniI_B',
+                                        'X-Naver-Client-Secret': '5yVDk4wVaa'
+                                    }
+                                })
+                                .then(response => {
+
+
+                                    this.image = response.data.items[0].image
+
+
+
+                                })
+                        }
+                        if (!this.image) {
+                            this.image = "/image/noimg.gif"
                         }
                     })
-            },
-
-            clickShop() {
-                window.location.href = this.items[0].link;
             }
+
+        },
+
+        clickShop() {
+            window.location.href = this.items[0].link;
         }
-
-
-
-
     }
 </script>

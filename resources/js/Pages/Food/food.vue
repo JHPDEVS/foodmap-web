@@ -18,7 +18,7 @@
             </div>
 
             <!-- main -->
-            <div v-if="picked=='food'" class="min-w-full overflow-y-auto bg-white card mx-auto mt-3">
+            <div v-if="picked=='food'" class="min-w-full flex overflow-y-auto bg-white card mx-auto mt-3">
                 <div class="wrapper">
                     <input type="radio" name="select2" id="option-6" checked v-model="picked2" value="all" @change="refresh()">
                     <input type="radio" name="select2" id="option-7" v-model="picked2" value="livestock"  @change="refresh()">
@@ -26,10 +26,10 @@
                     <input type="radio" name="select2" id="option-9" v-model="picked2" value="processed"  @change="refresh()">
                     <input type="radio" name="select2" id="option-10" v-model="picked2" value="food2"  @change="refresh()">
                     <label for="option-6" class="option option-6">
-                        <span>전체</span>
+                        <span class="flex">전체</span>
                     </label>
                     <label for="option-7" class="option option-7">
-                        <span>농축산물</span>
+                        <span class="flex">농축산물</span>
                     </label>
                     <label for="option-8" class="option option-8">
                         <span>수산물</span>
@@ -81,7 +81,7 @@
                             <table class="w-full">
                                 <thead>
                                     <tr
-                                        class="text-md font-bold tracking-wide text-left text-white bg-primary uppercase border-b border-gray-600">
+                                        class="text-xl font-bold tracking-wide text-left text-white bg-primary uppercase border-b border-gray-600">
                                         <th class="px-4 py-3">제품명</th>
                                         <th class="px-4 py-3">조사년도</th>
                                         <th class="px-4 py-3">1회 제공량</th>
@@ -92,7 +92,7 @@
                                 <tbody class="bg-white">
                                     <tr class="text-gray-700" v-for="(food,i) in foods" v-bind:key="i">
                                         <td class="px-4 py-3 border">
-                                            <div class="flex items-center text-sm">
+                                            <div class="flex items-center text-xl">
                                                 <div>
                                                     <a :href="`/food/show/${food.NO}/${food.식품명}`">
                                                         <p class="font-semibold text-blue-500"><span class="bg-white border text-red-600 py-1 px-3 rounded-full text-xs">{{food.지역___제조사}}</span>{{food.식품명}}</p>
@@ -107,7 +107,7 @@
                                                 class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-sm">
                                                 {{food.식품대분류}} </span>
                                         </td>
-                                        <td class="px-4 py-3 text-sm border">{{ food.에너지_kcal_}} Kcal</td>
+                                        <td class="px-4 py-3 text-xl font-bold border">{{ food.에너지_kcal_}} Kcal</td>
                                     </tr>
 
                                 </tbody>
