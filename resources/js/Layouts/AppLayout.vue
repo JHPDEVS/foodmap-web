@@ -4,7 +4,7 @@
 
         <jet-banner />
 
-        <div class="min-h-screen bg-gray-100">
+        <div class="min-h-screen bg-gray-100" >
             <nav class="bg-white border-b border-gray-100">
                 <!-- Primary Navigation Menu -->
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -12,15 +12,25 @@
                         <div class="flex">
                             <!-- Logo -->
                             <div class="flex-shrink-0 flex items-center">
-                                <Link :href="route('dashboard')">
-                                    <jet-application-mark class="block h-9 w-auto" />
-                                </Link>
+                                <h1 class="font-bold text-3xl text-primary" style="font-family: 'Jua', sans-serif;"><a :href="route('dashboard')">푸드맵</a></h1>
                             </div>
 
                             <!-- Navigation Links -->
                             <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                                 <jet-nav-link :href="route('dashboard')" :active="route().current('dashboard')">
-                                    Dashboard
+                                    홈
+                                </jet-nav-link>
+
+                                  <jet-nav-link :href="route('foodsearch')" :active="route().current('foodsearch')">
+                                    음식 검색
+                                </jet-nav-link>
+
+                                 <jet-nav-link :href="route('recipesearch')" :active="route().current('recipesearch')">
+                                    레시피 검색
+                                </jet-nav-link>
+
+                                <jet-nav-link :href="route('menus')" :active="route().current('menus')">
+                                    내 뱃속
                                 </jet-nav-link>
                             </div>
                         </div>
@@ -278,3 +288,6 @@
         }
     })
 </script>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Jua&display=swap');
+</style>
