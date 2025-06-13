@@ -27,8 +27,8 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/food/{food_name}', functi
     return Inertia::render('Food/food',['food_name'=>$food_name]);
 });
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/food/돼지국밥', function ($food_name) {
-    return Inertia::render('Food/food',['food_name'=>'돼지국밥']);
+Route::middleware(['auth:sanctum', 'verified'])->get('/food/떡볶이', function ($food_name) {
+    return Inertia::render('Food/food',['food_name'=>'떡볶이']);
 })->name('foodsearch');
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/food/show/{food_id}/{food_name}', function ($food_id,$food_name) {
@@ -43,8 +43,8 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/recipe/search/{recipe_nam
     return Inertia::render('Food/recipeSearch',['recipe_name'=>$recipe_name]);
 });
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/recipe/search/추천', function ($recipe_name) {
-    return Inertia::render('Food/recipeSearch',['recipe_name'=>"추천"]);
+Route::middleware(['auth:sanctum', 'verified'])->get('/recipe/search/간장게장', function ($recipe_name) {
+    return Inertia::render('Food/recipeSearch',['recipe_name'=>"간장게장"]);
 })->name('recipesearch');
 Route::middleware(['auth:sanctum', 'verified'])->get('/food/search/{food_name}', [FoodsController::class,'index']);
 Route::middleware(['auth:sanctum', 'verified'])->get('/food/index/{food_id}/{food_name}', [FoodsController::class,'show']);
