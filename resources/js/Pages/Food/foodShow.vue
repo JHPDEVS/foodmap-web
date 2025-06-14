@@ -789,7 +789,7 @@ export default {
                         console.log(this.items);
                         axios
                             .get(
-                                `${this.$page.props.env.PROXY_BASE_URL}` +
+                                `${this.$page.props.env.PROXY_BASE_URL}/` +
                                     this.items[0].link
                             )
                             .then((response) => {
